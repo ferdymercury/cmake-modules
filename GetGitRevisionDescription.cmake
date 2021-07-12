@@ -83,8 +83,8 @@ function(_git_find_closest_git_dir _start_dir _git_dir_var)
         PARENT_SCOPE)
 endfunction()
 
-function(get_git_head_revision _refspecvar _hashvar)
-    _git_find_closest_git_dir("${CMAKE_CURRENT_SOURCE_DIR}" GIT_DIR)
+function(get_git_head_revision _refspecvar _hashvar _startdir)
+    _git_find_closest_git_dir("${_startdir}" GIT_DIR)
 
     if("${ARGN}" STREQUAL "ALLOW_LOOKING_ABOVE_CMAKE_SOURCE_DIR")
         set(ALLOW_LOOKING_ABOVE_CMAKE_SOURCE_DIR TRUE)
