@@ -11,6 +11,9 @@ cmake_minimum_required(VERSION 3.10)
 
 include(${CMAKE_ROOT}/Modules/CMakeParseArguments.cmake)
 
+#https://stackoverflow.com/questions/12802377/in-cmake-how-can-i-find-the-directory-of-an-included-file
+set(CMAKE_CURRENT_MODULE_DIR ${CMAKE_CURRENT_LIST_DIR})
+
 ## HOW TO DOCUMENT YOUR CMAKE FILES :
 ## 1- Use CMAKE_DOCUMENTATION_START <name> flag to start your documentation
 ## 2- Document your cmake file like you want (you can use doxygen syntax)
@@ -79,11 +82,15 @@ MACRO(PARSE_CMAKE_DOCUMENTATION )
     # EXCLUDES cmake file to the list files
     if(NOT DEFINED PARSE_CMAKE_DOCUMENTATION_EXCLUDES)
         set(PARSE_CMAKE_DOCUMENTATION_EXCLUDES
-                "${CMAKE_SOURCE_DIR}/*make_documentation.cmake*") # mutual exclude by default
+                "${CMAKE_CURRENT_MODULE_DIR}/*make_documentation.cmake*") # mutual exclude by default
     endif()
     foreach(excludeFilePathPattern ${PARSE_CMAKE_DOCUMENTATION_EXCLUDES})
         file(GLOB_RECURSE cmake_files_exclude "${excludeFilePathPattern}")
-        list(REMOVE_ITEM cmake_files_list ${cmake_files_exclude})
+        if(cmake_files_exclude STREQUAL "") # files found in pattern
+            message("Note: no files found matching exclude pattern " ${excludeFilePathPattern})
+        else()
+            list(REMOVE_ITEM cmake_files_list ${cmake_files_exclude})
+        endif()
         #message("remove file from cmake documentation files list : ${cmake_files_exclude}")
     endforeach()
 
