@@ -186,24 +186,24 @@ MACRO(PROCESS_CMAKE_DOCUMENTATION cmakeFile sectionName sectionContent)
         list(APPEND gPROCESS_CMAKE_DOCUMENTATION_FILES_LIST "\\li \\ref ${sectionFileName}")
         ## section file description list
         list(APPEND gPROCESS_CMAKE_DOCUMENTATION_FILES_DESCRIPTIONS
-            "
-            \\subsection ${sectionFileName} ${sectionFileName}
-            \\par
-            \\e From: ${cmakeFileStrip} \\n
-            ${sectionContent}
-            "
+        "
+  \\subsection ${sectionFileName} ${sectionFileName}
+  \\par
+  \\e From: ${cmakeFileStrip} \\n
+  ${sectionContent}
+"
         )
     else()
         ## section doc name list
         list(APPEND gPROCESS_CMAKE_DOCUMENTATION_SECTION_LIST "\\li \\ref ${sectionName}")
         ## section doc description list
         list(APPEND gPROCESS_CMAKE_DOCUMENTATION_SECTION_CONTENT
-                "
-                \\subsection ${sectionName} ${sectionName}
-                \\par
-                \\e From: ${cmakeFileStrip} \\n
-                ${sectionContent}
-                "
+        "
+  \\subsection ${sectionName} ${sectionName}
+  \\par
+  \\e From: ${cmakeFileStrip} \\n
+  ${sectionContent}
+"
         )
     endif()
 
@@ -226,11 +226,11 @@ FUNCTION(WRITE_CMAKE_DOCUMENTATION outputPathFileName)
     ## header file
     list(APPEND header "${WRITE_CMAKE_DOCUMENTATION_HEADER}
 
-        MASTER INDEX CMAKE TOOLS
-
-        \\li \\ref cmake_doc
-        \\li \\ref cmake_files
-    ")
+  MASTER INDEX CMAKE TOOLS
+  
+  \\li \\ref cmake_doc
+  \\li \\ref cmake_files
+")
     file(APPEND  "${outputPathFileName}" "${header}")
 
 
@@ -266,14 +266,14 @@ FUNCTION(WRITE_CMAKE_DOCUMENTATION outputPathFileName)
     ## Fill content documentation
     set(content
         "
-        \\section cmake_doc CMAKE DOC
-        ${gPROCESS_CMAKE_DOCUMENTATION_SECTION_LIST}
-        ${gPROCESS_CMAKE_DOCUMENTATION_SECTION_CONTENT}
+  \\section cmake_doc CMAKE DOC
+  ${gPROCESS_CMAKE_DOCUMENTATION_SECTION_LIST}
+  ${gPROCESS_CMAKE_DOCUMENTATION_SECTION_CONTENT}
 
-        \\section cmake_files CMAKE FILES
-        ${gPROCESS_CMAKE_DOCUMENTATION_FILES_LIST}
-        ${gPROCESS_CMAKE_DOCUMENTATION_FILES_DESCRIPTIONS}
-        "
+  \\section cmake_files CMAKE FILES
+  ${gPROCESS_CMAKE_DOCUMENTATION_FILES_LIST}
+  ${gPROCESS_CMAKE_DOCUMENTATION_FILES_DESCRIPTIONS}
+"
     )
     file(APPEND  "${outputPathFileName}" "${content}")
 
